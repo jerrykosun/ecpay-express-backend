@@ -1,28 +1,14 @@
 {
   "name": "ecpay-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple square and cube API server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "ecpay_aio_nodejs": "^1.2.2",
-    "express": "^5.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jerrykosun/ecpay-express-backend.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jerrykosun/ecpay-express-backend/issues"
-  },
-  "homepage": "https://github.com/jerrykosun/ecpay-express-backend#readme"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
 }
