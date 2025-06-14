@@ -1,33 +1,32 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+
 const app = express();
-const port = process.env.PORT || 3000;
-
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.post('/ecpay-checkout', (req, res) => {
-  const { MerchantTradeNo, TotalAmount, ItemName } = req.body;
-
-  const ecpay = require('ecpay_aio_nodejs');
-  let base_param = {
-    MerchantTradeNo,
-    MerchantTradeDate: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    TotalAmount,
-    TradeDesc: '測試交易',
-    ItemName,
-    ReturnURL: 'https://你的domain.com/ecpay-return',
-    ClientBackURL: 'https://你的網站.com/thankyou',
-  };
-
-  let create = new ecpay(payment_conf).payment_client();
-  let html = create.payment_client.aio_check_out_all(base_param);
-  res.send(html);
+// 根目錄測試用
+app.get('/', (req, res) => {
+  res.send('Square & Cube API is working!');
 });
 
+// 核心服務：計算平方與立方
+app.post('/calc', (req, res) => {
+  const { number } = req.body;
+
+  if (typeof number !== 'number') {
+    return res.status(400).json({ error: '請傳入數字' });
+  }
+
+  const square = number ** 2;
+  const cube = number ** 3;
+
+  res.json({ number, square, cube });
+});
+
+// 啟動服務
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
